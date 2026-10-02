@@ -2,28 +2,34 @@ pipeline {
     agent any
 
     stages {
+
         stage('Checkout') {
             steps {
-                git branch: 'main',
-                    url: 'https://github.com/Amritapandey-01/flask-jenkins-demo'
+                echo 'Checking out the project...'
+            }
+        }
+
+        stage('Check Python') {
+            steps {
+                bat '"C:\\Users\\Amrita\\AppData\\Local\\Programs\\Python\\Python314\\python.exe" --version'
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                bat 'python -m pip install -r requirements.txt'
+                bat '"C:\\Users\\Amrita\\AppData\\Local\\Programs\\Python\\Python314\\python.exe" -m pip install -r requirements.txt'
             }
         }
 
         stage('Test') {
             steps {
-                bat 'pytest'
+                bat '"C:\\Users\\Amrita\\AppData\\Local\\Programs\\Python\\Python314\\python.exe" -m pytest'
             }
         }
 
         stage('Deploy') {
             steps {
-                bat 'echo Application deployed successfully'
+                echo 'Deployment completed.'
             }
         }
     }
